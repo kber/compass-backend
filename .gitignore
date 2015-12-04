@@ -1,0 +1,12 @@
+node_modules
+config.json
+*.log
+.idea
+*.iml
+locales/en-US.js
+test/fixtures/locales/en-US.js
+config/production.json
+.DS_Store
+local.log
+*.rdb
+.naptcha

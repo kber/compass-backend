@@ -1,0 +1,52 @@
+{
+  "name": "event-compass",
+  "version": "0.0.1",
+  "description": "mass event organize & management system",
+  "main": "index.js",
+  "babel": {
+    "presets": ["stage-0"],
+    "ignore": [
+      "foo.js",
+      "bar/**/*.js"
+    ]
+  },
+  "dependencies": {
+    "bookshelf": "^0.9.1",
+    "camelize": "1.0.0",
+    "config": "^1.17.0",
+    "hashids": "1.0.2",
+    "lodash": "^3.10.1",
+    "log4js": "^0.6.24",
+    "mysql": "^2.4.3",
+    "knex": "^0.9.0",
+    "koa": "latest",
+    "koa-body": "latest",
+    "koa-cors": "0.0.16",
+    "koa-gzip": "0.1.0",
+    "koa-router": "5.1.2",
+    "koa-session": "3.3.1"
+  },
+  "devDependencies": {
+    "babel": "latest",
+    "babel-core": "^6.1.21",
+    "babel-cli": "latest",
+    "babel-preset-stage-0": "latest",
+    "jscs": "^1.10.0",
+    "jshint": "^2.9.1-rc1",
+    "jshint-stylish": "^1.0.0",
+    "nodemon": "^1.8.1",
+    "sql-fixtures": "0.11.0"
+  },
+  "scripts": {
+    "db": "knex migrate:latest && node ./fixtures/create.js",
+    "dev": "nodemon --exec babel-node -- bin/www"
+  },
+  "keywords": [
+    "event",
+    "management",
+    "flow",
+    "update"
+  ],
+  "author": "Daniel Qin <taurencoder@gmail.com>",
+  "license": "ISC"
+}
