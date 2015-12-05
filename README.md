@@ -12,12 +12,18 @@ Usage
 ### Prepare database env
 
 ```bash
-brew install mysql
-mysql -uroot 
-"create database bolt_compass;"
+brew install postgresql
+alias postgres.server='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+psql -d template1 -U postgres
+create user compass with password 'start123';
+create database compass_backend;
+grant all privileges on database compass_backend to compass;
+\q
 
 npm run db
 ```
+
 
 ### Start the server
 
