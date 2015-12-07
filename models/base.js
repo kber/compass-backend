@@ -5,11 +5,11 @@ const config = require('config');
 const _ = require('lodash');
 const utils = require('../lib/utils');
 const schema = require('../data/schema');
-var boltBookshelf;
+let compassBookshelf;
 
-boltBookshelf = bookshelf(knex(config.database));
-boltBookshelf.plugin('registry');
-boltBookshelf.Model = boltBookshelf.Model.extend({
+compassBookshelf = bookshelf(knex(config.database));
+compassBookshelf.plugin('registry');
+compassBookshelf.Model = compassBookshelf.Model.extend({
   hasTimestamps: ['createdAt', 'updatedAt'],
 
   initialize() {
@@ -112,4 +112,4 @@ boltBookshelf.Model = boltBookshelf.Model.extend({
   }
 });
 
-module.exports = boltBookshelf;
+module.exports = compassBookshelf;

@@ -1,11 +1,11 @@
-const boltBookshelf = require('./base');
+const compassBookshelf = require('./base');
 
-var Sample = boltBookshelf.Model.extend({
+var Sample = compassBookshelf.Model.extend({
   tableName: 'samples'
 
   //define orm mapping here
 });
 
 module.exports = {
-  Sample: boltBookshelf.model('Sample', Sample)
+  Sample: compassBookshelf.model('Sample', Sample)
 };

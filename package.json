@@ -13,6 +13,7 @@
   "dependencies": {
     "bookshelf": "^0.9.1",
     "camelize": "1.0.0",
+    "cancan": "^2.0.1",
     "config": "^1.17.0",
     "hashids": "1.0.2",
     "lodash": "^3.10.1",
@@ -40,8 +41,8 @@
   },
   "scripts": {
     "db": "knex migrate:latest && node ./fixtures/create.js",
-    "dev": "nodemon --es_staging bin/www"
-    //"dev": "nodemon --exec babel-node -- bin/www"
+    "dev": "nodemon --es_staging bin/www",
+    "babel": "nodemon --exec babel-node -- bin/www"
   },
   "keywords": [
     "event",
