@@ -13,6 +13,13 @@ exports.up = (knex) => knex.schema.createTable('user', (table) => {
   table.string('created_by', 50);
   table.string('updated_by', 50);
   table.timestamps();
+}).createTable('area', (table) => {
+  table.increments();
+  table.string('name', 255);
+  table.string('short_name', 255);
+  table.integer('level_id');
+  table.integer('parent_id');
+  table.integer('type');
 }).createTable('location', (table) => {
   table.increments();
   table.string('address_line1', 255);
@@ -43,6 +50,7 @@ exports.up = (knex) => knex.schema.createTable('user', (table) => {
 }); 
 
 exports.down = (knex) => knex.schema.dropTable('contact_information')
+.dropTable('area')
 .dropTable('location')
-.dropTable('phoneNumber')
+.dropTable('phone_number')
 .dropTable('user');
