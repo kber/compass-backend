@@ -7,6 +7,7 @@ const log = require('./lib/log');
 const bodyparser = require('koa-body');
 const i18n = require('koa-i18n');
 const session = require('koa-session');
+const locale = require('koa-locale');
 const i18nConfig = {directory: './locales', locales: ['zh-CN', 'en-US'], header: true};
 const compassError = require('./middlewares/compass-error');
 const context = require('./middlewares/context');
@@ -21,6 +22,7 @@ if (config.app.cors) {
   }));
 }
 
+locale(app);
 svcInitializer.init();
 app.use(i18n(app, i18nConfig));
 app.use(session(app));
