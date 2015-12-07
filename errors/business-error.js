@@ -3,26 +3,24 @@ const _ = require('lodash');
 const sprintf = require('sprintf');
 const ERROR_MSG = 'You\'re experiencing unexpected errorInfo, please contact HEEYLA for support.';
 
-const BusinessError = function(errorInfo){
-  Error.call(this);
-  Error.captureStackTrace(this, this.constructor);
-  this.name = 'BusinessError';
-  if (_.isString(errorInfo.message)) {
-    this.message = errorInfo.message || ERROR_MSG;
-  } else if (_.isObject(errorInfo.message) && !_.isArray(errorInfo.message)) {
-    this.message = errorInfo.message[Object.keys(errorInfo.message)[0]] || ERROR_MSG;
-  } else {
-    this.message = ERROR_MSG;
+class BusinessError extends Error{
+  constructor(errorInfo) {
+    super();
+    this.name = 'BusinessError';
+    if (_.isString(errorInfo.message)) {
+      this.message = errorInfo.message || ERROR_MSG;
+    } else if (_.isObject(errorInfo.message) && !_.isArray(errorInfo.message)) {
+      this.message = errorInfo.message[Object.keys(errorInfo.message)[0]] || ERROR_MSG;
+    } else {
+      this.message = ERROR_MSG;
+    }
+
+    this.message = sprintf(this.message, errorInfo.params);
+    this.errorInfo = errorInfo;
+    return this;
   }
+}
 
-  this.message = sprintf(this.message, errorInfo.params);
-  this.errorInfo = errorInfo;
-};
-
-BusinessError.prototype = Object.create(Error.prototype);
-BusinessError.prototype.constructor = BusinessError;
-
-//const Builder = () => {};
 class Builder {
   message(theMessage) {
     this.theMessage = theMessage;
@@ -68,6 +66,7 @@ class Builder {
     });
   }
 }
+
 BusinessError.builder = () => new Builder();
 
 BusinessError.message = message => {
