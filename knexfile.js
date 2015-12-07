@@ -1,7 +1,7 @@
-var config = require('config');
-
-var envName = config.util.getEnv('NODE_ENV');
-var migrationConfig = {};
+'use strict';
+const config = require('config');
+const envName = config.util.getEnv('NODE_ENV');
+let migrationConfig = {};
 
 migrationConfig[envName] = {
   client: config.database.client,

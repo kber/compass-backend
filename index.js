@@ -1,11 +1,12 @@
+'use strict';
 const Koa = require('koa');
 const app = new Koa();
 const cors = require('koa-cors');
 const gzip = require('koa-gzip');
-const log = require('./utils/log');
+const log = require('./lib/log');
 const bodyparser = require('koa-body');
 const config = require('config');
-const svcInitializer = require('./utils/service-initializer');
+const svcInitializer = require('./lib/service-initializer');
 
 if (config.app.cors) {
   app.use(cors({
@@ -19,15 +20,10 @@ app.use(bodyparser({multipart: true}));
 app.use(log.middleware(log.logger, {level: 'auto'}));
 app.use(gzip());
 
-app.use(function* (next) {
-  //console.log('this is a middleware sample');
-  yield next;
-});
-
-function initRoutes() {
-  for (var i = 0; i < arguments.length; i++) {
-    app.use(arguments[i].routes());
-    app.use(arguments[i].allowedMethods());
+const initRoutes = (...args)  => {
+  for (let i = 0; i < args.length; i++) {
+    app.use(args[i].routes());
+    app.use(args[i].allowedMethods());
   }
 }
 

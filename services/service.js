@@ -1,3 +1,4 @@
+'use strict';
 const _ = require('lodash');
 
 module.exports = {
@@ -5,14 +6,14 @@ module.exports = {
 
   services: [],
 
-  extend: function(svc) {
-    var svcInstance = _.extend({}, this, svc);
+  extend(svc) {
+    let svcInstance = _.extend({}, this, svc);
     this.addServiceInstance(svcInstance);
     return svcInstance;
   },
 
-  getServiceInstance: function(name) {
-    var svc = _.findWhere(this.services, {'name': name});
+  getServiceInstance(name) {
+    let svc = _.findWhere(this.services, {'name': name});
     if (_.isEmpty(svc)) {
       return null;
     } else {
@@ -20,7 +21,7 @@ module.exports = {
     }
   },
 
-  addServiceInstance: function(svc) {
+  addServiceInstance(svc) {
     if (_.isEmpty(this.getServiceInstance(svc.name))) {
       this.services.push({'name': svc.name, 'instance': svc});
     }

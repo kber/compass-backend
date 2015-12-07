@@ -1,8 +1,9 @@
+'use strict';
 const bookshelf = require('bookshelf');
 const knex = require('knex');
 const config = require('config');
 const _ = require('lodash');
-const utils = require('../utils/utils');
+const utils = require('../lib/utils');
 const schema = require('../data/schema');
 var boltBookshelf;
 
@@ -11,23 +12,23 @@ boltBookshelf.plugin('registry');
 boltBookshelf.Model = boltBookshelf.Model.extend({
   hasTimestamps: ['createdAt', 'updatedAt'],
 
-  initialize: function() {
+  initialize() {
     this.on('creating', this.creating, this);
     this.on('saving', this.saving, this);
   },
 
-  format: function(attrs) {
+  format(attrs) {
     return utils.underscored(attrs);
   },
 
-  parse: function(attrs) {
+  parse(attrs) {
     return utils.camelize(attrs);
   },
 
-  creating: function(newObj, attr, context) {
+  creating(newObj, attr, context) {
     this.attributes = this.pick(this.permittedAttributes());
     this._updatedAttributes = newObj.previousAttributes();
-    var contextUser = this.contextUser(context);
+    let contextUser = this.contextUser(context);
 
     if (_(this.permittedAttributes()).contains('createdBy') && !this.get('createdBy') && !!contextUser) {
       this.set('createdBy', contextUser);
@@ -38,17 +39,17 @@ boltBookshelf.Model = boltBookshelf.Model.extend({
     }
   },
 
-  saving: function(newObj, attr, context) {
+  saving(newObj, attr, context) {
     this.attributes = this.pick(this.permittedAttributes());
     this._updatedAttributes = newObj.previousAttributes();
 
-    var contextUser = this.contextUser(context);
+    let contextUser = this.contextUser(context);
     if (_(this.permittedAttributes()).contains('updatedBy') && !!contextUser) {
       this.set('updatedBy', contextUser);
     }
   },
 
-  contextUser: function(context) {
+  contextUser(context) {
     if (context && context.user) {
       return context.user;
     } else {
@@ -56,7 +57,7 @@ boltBookshelf.Model = boltBookshelf.Model.extend({
     }
   },
 
-  permittedAttributes: function() {
+  permittedAttributes() {
     var attrsArr = schema.tables[this.tableName];
     var camelizedAttrs = [];
     // Fix race condition between creating&format
@@ -66,7 +67,7 @@ boltBookshelf.Model = boltBookshelf.Model.extend({
     return attrsArr.concat(camelizedAttrs);
   },
 
-  getId: function() {
+  getId() {
     return this.get('id');
   }
 }, {

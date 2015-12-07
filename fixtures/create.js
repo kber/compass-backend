@@ -1,8 +1,7 @@
 'use strict';
-
-var SqlFixtures = require('sql-fixtures'),
-  config = require('config'),
-  sqlFixtures = new SqlFixtures(config.database);
+const SqlFixtures = require('sql-fixtures');
+const config = require('config');
+const sqlFixtures = new SqlFixtures(config.database);
 
 sqlFixtures.create({
   samples: require('./samples')
