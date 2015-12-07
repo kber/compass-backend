@@ -28,7 +28,7 @@ const initRoutes = (...args)  => {
 }
 
 initRoutes(
-  require('./routers/samples')
+  require('./routers/users')
 );
 
 module.exports = app;

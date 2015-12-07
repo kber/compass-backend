@@ -58,13 +58,14 @@ compassBookshelf.Model = compassBookshelf.Model.extend({
   },
 
   permittedAttributes() {
-    var attrsArr = schema.tables[this.tableName];
-    var camelizedAttrs = [];
-    // Fix race condition between creating&format
-    _.each(attrsArr, function(attr) {
+    let dbSchema = schema.tables[this.tableName];
+    dbSchema = dbSchema.concat(['created_by', 'updated_by', 'created_at', 'updated_at']);
+
+    let camelizedAttrs = [];
+    _.each(dbSchema, function(attr) {
       camelizedAttrs.push(_.camelCase(attr));
     });
-    return attrsArr.concat(camelizedAttrs);
+    return dbSchema.concat(camelizedAttrs);
   },
 
   getId() {

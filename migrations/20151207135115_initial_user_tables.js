@@ -43,5 +43,6 @@ exports.up = (knex) => knex.schema.createTable('user', (table) => {
 }); 
 
 exports.down = (knex) => knex.schema.dropTable('contact_information')
-.dropTable('user')
-.dropTable('location');
+.dropTable('location')
+.dropTable('phoneNumber')
+.dropTable('user');

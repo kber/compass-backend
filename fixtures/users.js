@@ -1,8 +1,7 @@
 module.exports = [{
   name: 'sample 001',
-  desc: 'this is a sample text'
+  account_name: 'test_001'
 }, {
   name: 'sample 002',
-  desc: 'this is a sample text'
+  account_name: 'asdfsdf'
 }];
-
