@@ -26,7 +26,7 @@ exports.isAuthenticated = function *isAuthenticated(next) {
     BusinessError.unauthorized('Token expired').boom();
   }
 
-  this.authenticatedUser = yield User.findOneByProperty({'account_name': decoded.username}, this.boltContext);
+  this.authenticatedUser = yield User.findOneByProperty({'account_name': decoded.username}, this.ctx);
 
   if (!this.authenticatedUser) {
     BusinessError.unauthorized('Authentication required').boom();
@@ -34,9 +34,9 @@ exports.isAuthenticated = function *isAuthenticated(next) {
     //resouceAccess.config(this.authenticatedUser);
   }
 
-  if (this.boltContext) {
-    this.boltContext.user = this.authenticatedUser.get('accountName');
-    this.boltContext.authenticatedUser = this.authenticatedUser;
+  if (this.ctx) {
+    this.ctx.user = this.authenticatedUser.get('accountName');
+    this.ctx.authenticatedUser = this.authenticatedUser;
   }
 
   // Extend expiration for the token

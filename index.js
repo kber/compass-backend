@@ -24,12 +24,12 @@ if (config.app.cors) {
 
 locale(app);
 svcInitializer.init();
+app.use(gzip());
 app.use(i18n(app, i18nConfig));
 app.use(session(app));
 app.use(bodyparser({multipart: true}));
 app.use(compassError());
 app.use(log.middleware(log.logger, {level: 'auto'}));
-app.use(gzip());
 app.use(context());
 
 reason(app);
