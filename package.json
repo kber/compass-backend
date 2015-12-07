@@ -40,7 +40,8 @@
   },
   "scripts": {
     "db": "knex migrate:latest && node ./fixtures/create.js",
-    "dev": "nodemon --exec babel-node -- bin/www"
+    "dev": "nodemon --es_staging bin/www"
+    //"dev": "nodemon --exec babel-node -- bin/www"
   },
   "keywords": [
     "event",
