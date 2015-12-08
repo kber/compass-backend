@@ -1,15 +1,15 @@
 Compass service
 =================
 
-This is a sample service using NodeJS, Koa
+This is backend service for Compass project using NodeJS, Koa
 
 Node.js 4.2.1
-mysql 5.6.26+
+postgreSQL 9.4.5
 
 Usage
 -------
 
-### Prepare database env
+### Prepare database environment
 
 ```bash
 brew install postgresql
@@ -22,10 +22,12 @@ create user compass with password 'start123';
 create database compass_backend;
 grant all privileges on database compass_backend to compass;
 \q
+```
+### Initialize database schema
 
+```bash
 npm run db
 ```
-
 
 ### Start the server
 
@@ -33,7 +35,7 @@ npm run db
 npm start
 ```
 
-### Start the development env server
+### Start the development environment server
 
 ```bash
 npm run dev
@@ -86,6 +88,6 @@ Technical Stack
 
 type     |  name
 -------- | ------
-database |  MySQL
+database |  PostgreSQL
 server   |  koa
 ORM      |  bookshelf

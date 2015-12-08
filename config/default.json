@@ -15,7 +15,7 @@
     "connection": {
       "host": "127.0.0.1",
       "charset": "utf8",
-      "user": "test",
+      "user": "compass",
       "password": "start123",
       "database": "compass_backend",
       "timezone": "UTC"
