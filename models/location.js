@@ -2,7 +2,7 @@
 const compassBookshelf = require('./base');
 const Checkit = require('checkit');
 
-let Location = compassBookshelf.Model.extend({
+const Location = compassBookshelf.Model.extend({
   tableName: 'location',
 
   constructor: function() {

@@ -1,7 +1,7 @@
 'use strict';
 const compassBookshelf = require('./base');
 
-let ContactInformation = compassBookshelf.Model.extend({
+const ContactInformation = compassBookshelf.Model.extend({
   tableName: 'contact_information',
 
   user() {

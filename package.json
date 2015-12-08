@@ -11,10 +11,12 @@
     ]
   },
   "dependencies": {
+    "bcrypt": "0.8.5",
     "bookshelf": "^0.9.1",
     "camelize": "1.0.0",
     "cancan": "^2.0.1",
     "checkit": "0.6.0",
+    "cn-id-card-validator": "0.1.0",
     "config": "^1.17.0",
     "hashids": "1.0.2",
     "lodash": "^3.10.1",
@@ -33,8 +35,10 @@
     "koa-router": "5.1.2",
     "koa-session": "3.3.1",
     "merge-descriptors": "1.0.0",
+    "moment": "2.10.6",
     "shortid": "2.2.4",
-    "sprintf": "0.1.5"
+    "sprintf": "0.1.5",
+    "thenify": "3.1.1"
   },
   "devDependencies": {
     "babel": "latest",

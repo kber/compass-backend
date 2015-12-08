@@ -2,7 +2,7 @@
 const compassBookshelf = require('./base');
 const Checkit = require('checkit');
 
-let PhoneNumber = compassBookshelf.Model.extend({
+const PhoneNumber = compassBookshelf.Model.extend({
   tableName: 'phone_number',
 
   constructor: function() {
