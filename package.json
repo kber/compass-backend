@@ -27,7 +27,8 @@
     "koa-body": "latest",
     "koa-cors": "0.0.16",
     "koa-gzip": "0.1.0",
-    "koa-i18n": "1.1.0",
+    "koa-helmet": "0.2.0",
+    "koa-i18n": "1.2.0",
     "koa-locale": "1.0.0",
     "koa-router": "5.1.2",
     "koa-session": "3.3.1",
@@ -48,7 +49,7 @@
   },
   "scripts": {
     "db": "knex migrate:latest && knex seed:run && node ./fixtures/create.js",
-    "dev": "nodemon --es_staging bin/www",
+    "dev": "nodemon --ignore locales/ --es_staging bin/www",
     "babel": "nodemon --exec babel-node -- bin/www"
   },
   "keywords": [
