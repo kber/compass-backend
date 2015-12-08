@@ -48,7 +48,8 @@ const User = compassBookshelf.Model.extend({
   authenticate: function* (accountName, pwd) {
     let existUser = yield this.findOneByProperty({'account_name': accountName});
     if (!_.isEmpty(existUser)) {
-      return yield compare(pwd, existUser.get('password')) ? existUser : null;
+      let authenticated = yield compare(pwd, existUser.get('password')); 
+      return authenticated ? existUser : null;
     } else {
       return null;
     }

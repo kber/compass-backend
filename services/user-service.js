@@ -16,7 +16,12 @@ const userService = service.extend({
   },
 
   authenticate: function* (accountName, pwd) {
-    return yield User.authenticate(accountName, pwd);
+    var authenticatedUser = yield User.authenticate(accountName, pwd);
+    if (_.isEmpty(authenticatedUser)) {
+      BusinessError.badRequest({'accountName': 'Account name or password invalid, please verify and try again'}).boom();
+    } else {
+      return authenticatedUser;
+    }
   },
 
   getProfile: function* (id, context){
