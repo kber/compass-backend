@@ -1,0 +1,2 @@
+[target]
+120.24.67.51 expose_port=3000 env=staging

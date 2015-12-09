@@ -1,0 +1,15 @@
+- hosts: target
+  remote_user: deploy
+  vars:
+    version: '{{ app_version }}'
+    repository_name: dr:5000/compass-backend
+    image_name: '{{ repository_name }}:{{ version }}'
+    container_name: compass-backend
+
+  tasks:
+    - name: pull image
+      command: docker pull {{ image_name }}
+
+    - name: migrate
+      command: docker run -e ENV={{ env }} --rm {{ image_name }} migrate
+

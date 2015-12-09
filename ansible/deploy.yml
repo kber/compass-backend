@@ -1,0 +1,32 @@
+- hosts: target
+  remote_user: deploy
+  vars:
+    version: '{{ app_version }}'
+    repository_name: dr:5000/compass-backend
+    image_name: '{{ repository_name }}:{{ version }}'
+    container_name: compass-backend
+
+  tasks:
+    - name: create log directory
+      command: mkdir -p /appLogs
+
+    - name: check running log
+      command: docker logs --tail=1 {{ container_name }}
+      register: log
+      ignore_errors: yes
+
+    - name: stop container compass-backend
+      command: docker stop {{ container_name }}
+      ignore_errors: yes
+      when: log | success
+
+    - name: remove container compass-backend
+      command: docker rm {{ container_name }}
+      ignore_errors: yes
+      when: log | success
+
+    - name: pull image
+      command: docker pull {{ image_name }}
+
+    - name: start server
+      command: docker run --name {{ container_name }} -v /appLogs:/appLogs -p {{ expose_port }}:3000 -d -e LOG_FILE_PATH=/appLogs/app.log -e ENV={{ env }} --restart always {{ image_name }}

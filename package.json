@@ -53,6 +53,8 @@
     "sql-fixtures": "0.11.0"
   },
   "scripts": {
+    "start": "nodemon --ignore locales/ --harmony bin/www",
+    "migrate": "knex migrate:latest",
     "db": "knex migrate:latest && knex seed:run && node ./fixtures/create.js",
     "dev": "nodemon --ignore locales/ --es_staging bin/www",
     "babel": "nodemon --exec babel-node -- bin/www"
