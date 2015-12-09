@@ -58,9 +58,9 @@
     "db": "knex migrate:latest && knex seed:run && node ./fixtures/create.js",
     "dev": "nodemon --ignore locales/ --es_staging bin/www",
     "babel": "nodemon --exec babel-node -- bin/www",
-    "docker:image": "docker build -t ${REGISTRY:-dr:5000}/bolt-backend:${VERSION:-dev} .",
-    "docker:push": "docker push ${REGISTRY:-dr:5000}/bolt-backend:${VERSION:-dev}",
-    "docker:clean": "docker rmi ${REGISTRY:-dr:5000}/bolt-backend:${VERSION:-dev}",
+    "docker:image": "docker build -t ${REGISTRY:-dr:5000}/compass-backend:${VERSION:-dev} .",
+    "docker:push": "docker push ${REGISTRY:-dr:5000}/compass-backend:${VERSION:-dev}",
+    "docker:clean": "docker rmi ${REGISTRY:-dr:5000}/compass-backend:${VERSION:-dev}",
     "docker:publish": "npm run docker:image && npm run docker:push && npm run docker:clean"
   },
   "keywords": [
