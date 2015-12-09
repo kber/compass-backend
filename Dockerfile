@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN cnpm install --production -d
 
-EXPOSE 3000
+EXPOSE 9000
 
 RUN chmod a+x entrypoint.sh
 
