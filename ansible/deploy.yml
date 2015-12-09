@@ -29,4 +29,4 @@
       command: docker pull {{ image_name }}
 
     - name: start server
-      command: docker run --name {{ container_name }} -v /appLogs:/appLogs -p {{ expose_port }}:3000 -d -e LOG_FILE_PATH=/appLogs/app.log -e ENV={{ env }} --restart always {{ image_name }}
+      command: docker run --name {{ container_name }} -v /appLogs:/appLogs -p {{ expose_port }}:9000 -d -e LOG_FILE_PATH=/appLogs/app.log -e ENV={{ env }} --restart always {{ image_name }}
