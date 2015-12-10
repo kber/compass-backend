@@ -18,15 +18,19 @@ const userService = service.extend({
   authenticate: function* (accountName, pwd) {
     var authenticatedUser = yield User.authenticate(accountName, pwd);
     if (_.isEmpty(authenticatedUser)) {
-      BusinessError.badRequest({'accountName': 'Account name or password invalid, please verify and try again'}).boom();
+      BusinessError.badRequest('Account name or password invalid, please verify and try again').boom();
     } else {
       return authenticatedUser;
     }
   },
 
-  getProfile: function* (id, context){
-    return yield User.findOne(id, _.merge({withRelated: ['contactInformation.location',
-                                          'contactInformation.phoneNumber']}, context));
+  getProfile: function* (id, context) {
+    return yield User.findOne(id, _.merge({
+      withRelated: [
+        'contactInformation.location',
+        'contactInformation.phoneNumber'
+      ]
+    }, context));
   }
 });
 
