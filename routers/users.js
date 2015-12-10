@@ -4,6 +4,7 @@ const auth = require('../middlewares/auth');
 const transaction = require('../middlewares/transaction');
 const validation = require('../middlewares/validation');
 const token = require('../lib/token');
+const BusinessError = require('../errors/business-error');
 
 const router = module.exports = new Router({
   prefix: '/api'
@@ -14,24 +15,23 @@ router
 .post('/v1/users/actions/login', validation.user, login)
 .get('/v1/users/profile', auth.isAuthenticated, findMyProfile);
 
-const attachToken = user => {
-  return {
-    token: token.create(user.get('accountName')),
-    user: user
-  };
-};
-
 function* registerNewUser() {
   var user = yield userService.register(this.request.body, this.ctx);
-  this.body = attachToken(user);
+  this.body = user;
+  this.cookies.set('authorization', token.create(user.get('accountName')));
   this.status = 201;
 }
 
 function* login() {
-  var user = this.request.body;
-  var loginUser = yield userService.authenticate(user.accountName, user.password);
-  this.body = attachToken(loginUser);
-  this.status = 200;
+  var result = yield userService.authenticate(this.request.body.accountName, this.request.body.password);
+  if (!result) {
+    BusinessError.badRequest({'accountName': 'Account name or password invalid, please verify and try again'}).boom();
+  } else {
+    var user = yield userService.getProfile(result.id, this.ctx);
+    this.body = user;
+    this.cookies.set('authorization', token.create(user.get('accountName')));
+    this.status = 200;
+  }
 }
 
 function* findMyProfile() {
